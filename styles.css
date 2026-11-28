@@ -223,3 +223,48 @@ mark.hn{border-bottom:2px dotted #b3261e}
 .dlg .btn{background:#ede2c8;color:var(--ink);border-color:#c8b48e}
 .dlg .btn.red{background:var(--red);color:#fff}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--paper);border:1px solid #6b4d34;padding:10px 16px;border-radius:6px;z-index:40;font-size:14px;box-shadow:0 6px 20px #0008}
+
+/* desktop: slightly larger type */
+@media(min-width:900px){
+  body{font-size:17px}
+  .top h1{font-size:28px}
+  #tabs button{font-size:17px}
+  #searchBtn,#saveBtn,#stats,.chk{font-size:15px}
+  .fname{font-size:19px}
+  .fsub,.hint,.grp button,.fact button,.unf,.pin,.cfoot em{font-size:14px}
+  .copen{font-size:15px;line-height:24px}
+  .app{grid-template-columns:350px minmax(0,1fr)}
+  .tag{font-size:14px}
+  .ptext{font-size:14px}
+  .pg{width:290px}
+  .note textarea{font-size:23px}
+  .btn,.btab{font-size:16px}
+  .sp{font-size:15px}
+  .sp b{font-size:20px}
+  .pos,.ctl label,.lockb,.seqtools,.filter,.filter button{font-size:14px}
+  .lrow label,.cn{font-size:14px}
+  .typed{font-size:19px}
+  .hlbar,.links,.meta label,.row,.hnotes{font-size:15px}
+  #reader .shead h2{font-size:22px}
+  #reader .typed,#reader .hlbar,#reader .meta,.hnotes{max-width:880px}
+}
+
+/* margin notes beside the page text (wide screens) */
+.tbody{position:relative}
+.margin{display:none}
+.mnote{position:absolute;left:0;right:0;text-align:left;background:#fffdf6;border:1px solid #e3d5b4;border-left:4px solid #ffd84a;border-radius:3px;padding:6px 10px;font-size:14px;line-height:1.45;color:var(--ink);box-shadow:0 2px 6px #0001;display:grid;gap:2px;cursor:pointer}
+.mnote b{font-size:13px}
+.mnote.on{border-left-color:var(--red);box-shadow:0 3px 10px #0003}
+#typed mark.on{outline:2px solid var(--red);outline-offset:1px}
+@media(min-width:1200px){
+  #reader .tbody{display:grid;grid-template-columns:minmax(0,820px) 290px;gap:28px;justify-content:center;padding-inline:16px}
+  #reader .tbody .typed{max-width:none;margin:0}
+  .margin{display:block;position:relative;margin-top:18px}
+  .hnotes{display:none}
+  #reader .hlbar,#reader .meta{max-width:1170px}
+}
+
+/* keyboard */
+#typed mark[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.hlb kbd{font:12px "Courier Prime",monospace;border:1px solid #b39424;border-radius:3px;padding:0 4px;margin-left:6px;background:#fff5c2}
+@media(pointer:coarse){.hlb kbd{display:none}}
