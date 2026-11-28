@@ -1,186 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cain's Jawbone Case File</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body data-view="board">
-    <header class="top">
-      <h1>Cain's Jawbone<span>CASE FILE</span></h1>
-      <nav id="tabs">
-        <button class="mob" data-v="files">Cabinet</button>
-        <button data-v="board">Board</button>
-        <button data-v="seq">Solution</button>
-      </nav>
-      <span id="stats"></span>
-      <button
-        id="aboutBtn"
-        aria-label="What is Cain's Jawbone?"
-        title="What is Cain's Jawbone?"
-      >
-        ?
-      </button>
-      <button id="searchBtn" aria-expanded="false" aria-controls="searchF">
-        Search
-      </button>
-      <button id="saveBtn">Save<span class="long"> / load</span></button>
-      <form id="searchF" role="search" hidden>
-        <input
-          id="q"
-          type="search"
-          placeholder="Search every page for a word…"
-          aria-label="Search pages"
-          autocomplete="off"
-        />
-        <label class="chk"
-          ><input type="checkbox" id="whole" /> whole word</label
-        >
-        <button type="button" id="searchX" aria-label="Close search">
-          Close
-        </button>
-      </form>
-    </header>
-    <main class="app">
-      <aside id="files" class="pane">
-        <div id="folders"></div>
-      </aside>
-      <section id="board" class="pane">
-        <div class="boardbar">
-          <div id="boardTabs"></div>
-          <div class="bctl">
-            <button class="btn" id="newBoard">+ Board</button>
-            <button class="btn" id="renBoard">Rename</button>
-            <button class="btn" id="delBoard">Delete</button>
-            <button class="btn red" id="addNote">+ Sticky note</button>
-            <div class="zoom">
-              <button class="btn" data-zoom="-1" aria-label="Zoom out">−</button
-              ><span id="zv">100%</span
-              ><button class="btn" data-zoom="1" aria-label="Zoom in">+</button>
-            </div>
-          </div>
-        </div>
-        <div id="corkWrap">
-          <div id="sizer"><div id="cork"></div></div>
-        </div>
-      </section>
-      <section id="seq" class="pane sheetpane">
-        <div class="paperbox">
-          <h2>The solution</h2>
-          <details id="ledgerBox">
-            <summary>The verdict <span id="ledSum"></span></summary>
-            <div class="ledbody">
-              <p class="lede">
-                Six murders, six victims, six murderers. Name each pair as you
-                uncover it, with the pages that prove it.
-              </p>
-              <div class="lgrid" id="lgrid"></div>
-              <label class="cn"
-                >Case notes<textarea
-                  id="caseNotes"
-                  placeholder="Theories, timelines, the narrator's identity…"
-                ></textarea>
-              </label>
-            </div>
-          </details>
-          <h3 class="sub">The sequence</h3>
-          <p class="lede">
-            Drag rows, use the arrows, or type a position. <b>p.N</b> is the
-            book's printed page; <b>#N</b> is your guess. Locked pages move
-            together as one run.
-          </p>
-          <div class="seqtools">
-            <span id="seqStat"></span
-            ><button class="btn" id="seqReset">Reset to book order</button
-            ><button class="btn" id="seqUnlock">Unlock all</button>
-          </div>
-          <p id="seqFilter" class="filter" hidden>
-            <span id="seqFilterTxt"></span>
-            <button id="seqClear">Show all</button>
-          </p>
-          <ol id="seqList"></ol>
-        </div>
-      </section>
-    </main>
-    <datalist id="tagList"></datalist>
-    <div class="overlay" id="reader" hidden>
-      <article
-        class="sheet"
-        id="sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Page reader"
-      ></article>
-    </div>
-    <div class="overlay" id="modal" hidden>
-      <div class="dlg" id="dlg" role="dialog" aria-modal="true"></div>
-    </div>
-    <div class="overlay" id="intro" hidden>
-      <div
-        class="dlg intro"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="introT"
-      >
-        <h3 id="introT">What is Cain's Jawbone?</h3>
-        <p>
-          A murder mystery that is also a puzzle. In 1934 Edward Powys Mathers,
-          who set cryptic crosswords for <i>The Observer</i> as “Torquemada”,
-          published a 100-page novel whose pages were deliberately printed out
-          of order.
-        </p>
-        <p>
-          <b>Your task:</b> put the 100 pages back in their correct order, and
-          name the <b>six people who are murdered</b> and the
-          <b>six people who murdered them</b>.
-        </p>
-        <p>
-          The story is told through the scattered thoughts of different
-          narrators, and the text is packed with literary quotations, wordplay
-          and 1930s references. Expect to look things up. Only a handful of
-          solvers are known: two in 1935, and the comedian John Finnemore in
-          2020, after the puzzle was reissued in 2019.
-        </p>
-        <h4>How to work the case</h4>
-        <ul>
-          <li>
-            <b>Cabinet</b>: every page, plus folders you create and folders for
-            your tags. Search finds a word on every page.
-          </li>
-          <li>
-            <b>Page reader</b>: highlight words and attach notes, tag the page,
-            and lock it to the page that comes right before or after it.
-          </li>
-          <li>
-            <b>Board</b>: pin pages and sticky notes, and arrange them however
-            helps you think.
-          </li>
-          <li>
-            <b>Solution</b>: put the pages in order and record your verdict on
-            the six murders.
-          </li>
-        </ul>
-        <p class="fine">
-          Everything you do is saved in this browser only. Use Save / load to
-          move it to another device.
-        </p>
-        <div class="acts">
-          <button class="btn red" id="introGo">Open the case</button>
-        </div>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cain's Jawbone Case File</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-view="board">
+<header class="top">
+  <h1>Cain's Jawbone<span>CASE FILE</span></h1>
+  <nav id="tabs">
+    <button class="mob" data-v="files">Cabinet</button>
+    <button data-v="board">Board</button>
+    <button data-v="seq">Solution</button>
+  </nav>
+  <span id="stats"></span>
+  <button id="aboutBtn" aria-label="What is Cain's Jawbone?" title="What is Cain's Jawbone?">?</button>
+  <button id="searchBtn" aria-expanded="false" aria-controls="searchF">Search</button>
+  <button id="saveBtn">Save<span class="long"> / load</span></button>
+  <form id="searchF" role="search" hidden>
+    <input id="q" type="search" placeholder="Search every page for a word…" aria-label="Search pages" autocomplete="off">
+    <label class="chk"><input type="checkbox" id="whole"> whole word</label>
+    <button type="button" id="searchX" aria-label="Close search">Close</button>
+  </form>
+</header>
+<main class="app">
+  <aside id="files" class="pane">
+    <div id="folders"></div>
+  </aside>
+  <section id="board" class="pane">
+    <div class="boardbar">
+      <div id="boardTabs"></div>
+      <div class="bctl">
+        <button class="btn" id="newBoard">+ Board</button>
+        <button class="btn" id="renBoard">Rename</button>
+        <button class="btn" id="delBoard">Delete</button>
+        <button class="btn red" id="addNote">+ Sticky note</button>
+        <div class="zoom"><button class="btn" data-zoom="-1" aria-label="Zoom out">−</button><span id="zv">100%</span><button class="btn" data-zoom="1" aria-label="Zoom in">+</button></div>
       </div>
     </div>
-    <div id="toast" hidden></div>
+    <div id="corkWrap"><div id="sizer"><div id="cork"></div></div></div>
+  </section>
+  <section id="seq" class="pane sheetpane">
+    <div class="paperbox">
+      <h2>The solution</h2>
+      <details id="ledgerBox"><summary>The verdict <span id="ledSum"></span></summary><div class="ledbody">
+        <p class="lede">Six murders, six victims, six murderers. Name each pair as you uncover it, with the pages that prove it.</p>
+        <div class="lgrid" id="lgrid"></div>
+        <label class="cn">Case notes<textarea id="caseNotes" placeholder="Theories, timelines, the narrator's identity…"></textarea></label>
+      </div></details>
+      <h3 class="sub">The sequence</h3>
+      <p class="lede">Drag rows, use the arrows, or type a position. <b>p.N</b> is the book's printed page; <b>#N</b> is your guess. Locked pages move together as one run.</p>
+      <div class="seqtools"><span id="seqStat"></span><button class="btn" id="seqReset">Reset to book order</button><button class="btn" id="seqUnlock">Unlock all</button></div>
+      <p id="seqFilter" class="filter" hidden><span id="seqFilterTxt"></span> <button id="seqClear">Show all</button></p>
+      <ol id="seqList"></ol>
+    </div>
+  </section>
+</main>
+<datalist id="tagList"></datalist>
+<div class="overlay" id="reader" hidden><article class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Page reader"></article></div>
+<div class="overlay" id="modal" hidden><div class="dlg" id="dlg" role="dialog" aria-modal="true"></div></div>
+<div class="overlay" id="intro" hidden><div class="dlg intro" role="dialog" aria-modal="true" aria-labelledby="introT">
+  <h3 id="introT">What is Cain's Jawbone?</h3>
+  <p>A 1934 murder mystery by Edward Powys Mathers (“Torquemada”, <i>The Observer</i>'s cryptic crossword setter), with its 100 pages deliberately printed out of order.</p>
+  <p><b>Your task:</b> put the pages back in order, and name the <b>six people murdered</b> and the <b>six people who murdered them</b>.</p>
+  <p>Expect several narrators, literary quotations, wordplay and 1930s references. Only a handful of people are known to have solved it: two in 1935, and John Finnemore in 2020.</p>
+  <h4>How to work the case</h4>
+  <ul>
+    <li><b>Cabinet:</b> every page, your folders, tag folders, and search.</li>
+    <li><b>Page reader:</b> highlight and annotate words, tag pages, lock a page to the one before or after it.</li>
+    <li><b>Board:</b> pin pages and sticky notes anywhere.</li>
+    <li><b>Solution:</b> put the pages in order and record your verdict.</li>
+  </ul>
+  <div class="acts"><p class="fine">Saved in this browser only. Use Save / load to move to another device.</p><button class="btn red" id="introGo">Open the case</button></div>
+</div></div>
+<div id="toast" hidden></div>
 
-    <script src="app.js"></script>
-  </body>
+<script src="app.js"></script>
+</body>
 </html>
