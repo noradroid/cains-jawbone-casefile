@@ -24,6 +24,13 @@
         <button data-v="seq">Solution</button>
       </nav>
       <span id="stats"></span>
+      <button
+        id="aboutBtn"
+        aria-label="What is Cain's Jawbone?"
+        title="What is Cain's Jawbone?"
+      >
+        ?
+      </button>
       <button id="searchBtn" aria-expanded="false" aria-controls="searchF">
         Search
       </button>
@@ -46,7 +53,6 @@
     </header>
     <main class="app">
       <aside id="files" class="pane">
-        <div class="drawer">— Cabinet —</div>
         <div id="folders"></div>
       </aside>
       <section id="board" class="pane">
@@ -118,6 +124,60 @@
     </div>
     <div class="overlay" id="modal" hidden>
       <div class="dlg" id="dlg" role="dialog" aria-modal="true"></div>
+    </div>
+    <div class="overlay" id="intro" hidden>
+      <div
+        class="dlg intro"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="introT"
+      >
+        <h3 id="introT">What is Cain's Jawbone?</h3>
+        <p>
+          A murder mystery that is also a puzzle. In 1934 Edward Powys Mathers,
+          who set cryptic crosswords for <i>The Observer</i> as “Torquemada”,
+          published a 100-page novel whose pages were deliberately printed out
+          of order.
+        </p>
+        <p>
+          <b>Your task:</b> put the 100 pages back in their correct order, and
+          name the <b>six people who are murdered</b> and the
+          <b>six people who murdered them</b>.
+        </p>
+        <p>
+          The story is told through the scattered thoughts of different
+          narrators, and the text is packed with literary quotations, wordplay
+          and 1930s references. Expect to look things up. Only a handful of
+          solvers are known: two in 1935, and the comedian John Finnemore in
+          2020, after the puzzle was reissued in 2019.
+        </p>
+        <h4>How to work the case</h4>
+        <ul>
+          <li>
+            <b>Cabinet</b>: every page, plus folders you create and folders for
+            your tags. Search finds a word on every page.
+          </li>
+          <li>
+            <b>Page reader</b>: highlight words and attach notes, tag the page,
+            and lock it to the page that comes right before or after it.
+          </li>
+          <li>
+            <b>Board</b>: pin pages and sticky notes, and arrange them however
+            helps you think.
+          </li>
+          <li>
+            <b>Solution</b>: put the pages in order and record your verdict on
+            the six murders.
+          </li>
+        </ul>
+        <p class="fine">
+          Everything you do is saved in this browser only. Use Save / load to
+          move it to another device.
+        </p>
+        <div class="acts">
+          <button class="btn red" id="introGo">Open the case</button>
+        </div>
+      </div>
     </div>
     <div id="toast" hidden></div>
 

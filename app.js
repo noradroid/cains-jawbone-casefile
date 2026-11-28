@@ -1,4 +1,4 @@
-// Cain's Jawbone case file — all state lives in localStorage (key cj-casefile-v1).
+// Cain's Jawbone case file: all state lives in localStorage (key cj-casefile-v1).
 (async () => {
   let PAGES;
   try {
@@ -1250,7 +1250,7 @@
     };
     $('#mWipe').onclick = () => {
       $('#mJson').value = JSON.stringify(fresh());
-      toast('Fresh file pasted — press Load to confirm');
+      toast('Fresh file pasted. Press Load to confirm.');
     };
     await p;
   }
@@ -1285,6 +1285,32 @@
     setView(S.view);
   }
   $('#saveBtn').addEventListener('click', saveDialog);
+  let introFrom = null;
+  function showIntro() {
+    introFrom = document.activeElement;
+    $('#intro').hidden = false;
+    $('#intro').scrollTop = 0;
+    $('#introGo').focus({ preventScroll: true });
+  }
+  function hideIntro() {
+    $('#intro').hidden = true;
+    if (!S.introSeen) {
+      S.introSeen = true;
+      save();
+    }
+    if (introFrom && introFrom.focus) introFrom.focus();
+  }
+  $('#aboutBtn').addEventListener('click', showIntro);
+  $('#introGo').addEventListener('click', hideIntro);
+  $('#intro').addEventListener('click', (e) => {
+    if (e.target.id === 'intro') hideIntro();
+  });
+  $('#intro').addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.stopPropagation();
+      hideIntro();
+    }
+  });
   function showSearch(on) {
     $('#searchF').hidden = !on;
     $('#searchBtn').setAttribute('aria-expanded', on);
@@ -1342,6 +1368,7 @@
   $('#q').value = S.q || '';
   $('#whole').checked = !!S.whole;
   refreshAll();
+  if (!S.introSeen) showIntro();
   if (S.q) {
     $('#searchF').hidden = false;
     $('#searchBtn').setAttribute('aria-expanded', true);

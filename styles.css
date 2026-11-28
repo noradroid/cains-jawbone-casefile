@@ -1,5 +1,5 @@
 /* VOICE: a hushed 1930s detective's office, late at night.
-   IDEA: the investigator's desk — filing cabinet of manila folders, a cork board, a typed ledger.
+   IDEA: the investigator's desk: filing cabinet of manila folders, a cork board, a typed ledger.
    PICTURE: the cork board itself, pinned with typed pages and sticky notes.
    COLOUR and TYPE: dark walnut desk, cork, manila, paper, one evidence-red; Special Elite + Courier Prime + Caveat.
    LAYOUT: cabinet left, working surface right; on phones one surface at a time behind tabs. */
@@ -26,7 +26,7 @@ button{cursor:pointer}
 #tabs{display:flex;gap:4px;flex-wrap:wrap}
 #tabs button{white-space:nowrap;background:none;border:0;border-bottom:3px solid transparent;padding:8px 10px;min-height:42px;font-family:"Special Elite",monospace;color:var(--soft)}
 #tabs button[aria-current=true]{color:var(--paper);border-color:var(--red)}
-#searchBtn{margin-left:auto}
+#aboutBtn{margin-left:auto}
 #searchBtn[aria-expanded=true]{background:var(--paper);color:var(--ink)}
 #searchBtn,#saveBtn{background:none;border:1px solid #6b4d34;border-radius:6px;padding:6px 10px;min-height:38px;font-size:14px;white-space:nowrap;color:var(--soft)}
 #stats{font-size:13px;color:var(--muted);white-space:nowrap}
@@ -52,7 +52,7 @@ body[data-view=board] #board,body[data-view=files] #board,body[data-view=seq] #s
   .top h1{font-size:21px}
   #stats{display:none}
   .top h1{flex:1}
-  #searchBtn{order:-1;margin-left:auto}#saveBtn{order:-1;margin-left:0}
+  #searchBtn{order:-1}#saveBtn{order:-1;margin-left:0}
   .top h1{overflow:hidden;text-overflow:ellipsis}#saveBtn .long{display:none}.top h1 span{margin-left:4px}
   .top h1{order:-2}
 
@@ -63,8 +63,9 @@ body[data-view=board] #board,body[data-view=files] #board,body[data-view=seq] #s
 }
 
 /* cabinet */
-.drawer{font:400 15px "Special Elite",monospace;color:var(--muted);text-align:center;border:1px solid #5a3d27;border-radius:4px;padding:6px;margin:10px 0 4px;background:#170f09}
+
 .grp{font:400 14px "Special Elite",monospace;color:var(--muted);margin:22px 0 0;display:flex;justify-content:space-between;align-items:center}
+#folders>.grp:first-child{margin-top:10px}
 .folder.drop{outline:3px dashed #ffcf6b;outline-offset:3px}
 .fact{display:flex;gap:12px;font-size:13px}.fact button,.unf{background:none;border:0;text-decoration:underline;color:#5b4a35;font-size:13px;padding:4px 0}
 .unf{margin-left:auto}.unf+.pin{margin-left:6px}
@@ -158,7 +159,7 @@ mark.hn{border-bottom:2px dotted #b3261e}
 .ctl button{width:36px;height:36px;border:1px solid #c8b48e;background:#efe5cd;border-radius:4px}
 .ctl input[type=number]{width:62px;height:36px;border:1px solid #c8b48e;background:#fff;border-radius:4px;padding:0 6px;font-size:16px}
 .ctl label{font-size:13px;display:flex;align-items:center;gap:3px}
-@media(max-width:480px){.top h1 span{display:none}}
+@media(max-width:480px){.top h1 span{display:none}.top h1{font-size:19px}}
 @media(max-width:600px){#seqList li{grid-template-columns:36px minmax(0,1fr)}.ctl,.locks{grid-column:2}}
 #ledgerBox{border:1px solid #c8b48e;background:#efe5cd;margin:10px 0 24px;padding:0 16px}
 #ledgerBox summary{font:400 22px "Special Elite",monospace;padding:12px 0;cursor:pointer;min-height:44px}
@@ -268,3 +269,15 @@ mark.hn{border-bottom:2px dotted #b3261e}
 #typed mark[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .hlb kbd{font:12px "Courier Prime",monospace;border:1px solid #b39424;border-radius:3px;padding:0 4px;margin-left:6px;background:#fff5c2}
 @media(pointer:coarse){.hlb kbd{display:none}}
+
+/* first-visit intro */
+#aboutBtn{background:none;border:1px solid #6b4d34;border-radius:50%;width:38px;height:38px;color:var(--soft);font:400 18px "Special Elite",monospace;flex:none}
+#aboutBtn:hover{color:var(--paper)}
+.intro{width:min(640px,100%);margin:3vh auto;padding:24px 28px;line-height:1.6}
+.intro h3{font-size:28px;line-height:1.1;color:var(--red);margin-bottom:14px}
+.intro h4{font:400 18px "Special Elite",monospace;margin:18px 0 6px}
+.intro p{margin:0 0 12px}
+.intro ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.intro .fine{font-size:14px;color:#6b5636;margin-top:14px}
+@media(max-width:600px){.intro{margin-top:0;padding:18px;font-size:15px}.intro h3{font-size:23px}}
+@media(max-width:899px){#aboutBtn{order:-1;width:36px;height:36px;margin-left:auto}}
